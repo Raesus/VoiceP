@@ -1,0 +1,13 @@
+C:\Users\krai\source\repos\Diplom\Diplom\bin\Debug\Diplom.exe.config
+C:\Users\krai\source\repos\Diplom\Diplom\bin\Debug\Diplom.exe
+C:\Users\krai\source\repos\Diplom\Diplom\bin\Debug\Diplom.pdb
+C:\Users\krai\source\repos\Diplom\Diplom\obj\Debug\Diplom.csprojAssemblyReference.cache
+C:\Users\krai\source\repos\Diplom\Diplom\obj\Debug\Diplom.Form1.resources
+C:\Users\krai\source\repos\Diplom\Diplom\obj\Debug\Diplom.Properties.Resources.resources
+C:\Users\krai\source\repos\Diplom\Diplom\obj\Debug\Diplom.Regis.resources
+C:\Users\krai\source\repos\Diplom\Diplom\obj\Debug\Diplom.csproj.GenerateResource.cache
+C:\Users\krai\source\repos\Diplom\Diplom\obj\Debug\Diplom.csproj.CoreCompileInputs.cache
+C:\Users\krai\source\repos\Diplom\Diplom\obj\Debug\Diplom.exe
+C:\Users\krai\source\repos\Diplom\Diplom\obj\Debug\Diplom.pdb
+C:\Users\krai\source\repos\Diplom\Diplom\obj\Debug\Diplom.Work.resources
+C:\Users\krai\source\repos\Diplom\Diplom\obj\Debug\Diplom.Admin.resources
