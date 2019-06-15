@@ -28,7 +28,14 @@ namespace Diplom
         string En;
         string ra;
         int v;
-        TimeSpan vs;
+        string b = "";
+        string b1 = "";
+        int c = 0;
+        int j = 0;
+        int pm=0, pc=0;
+        int wm=0, wc=0;
+        int pr = 0;
+        int pv = 0;
         int[] mas = new int[7];
         public static Bitmap BM = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
         SqlConnection con = new SqlConnection(@"Data Source=KRAI-ПК\SQLEXPRESS;Initial Catalog=Diplom;User ID=sa;Password=1234");
@@ -62,7 +69,7 @@ namespace Diplom
             timer3.Start();
             con.Open();           
             LstV.Items.Clear();
-            string Qurty2 = "SELECT Week.DayOfWeek, WeSm.IdSmena FROM [Week] INNER JOIN ([WeSm] INNER JOIN [Ussmen] ON WeSm.IdSmena=Ussmen.IdSmena AND Ussmen.IdUser='" + User.id + "')ON WeSm.IdWeek = Week.Id";
+            string Qurty2 = "SELECT Week.DayOfWeek, WeSm.IdSmena FROM [Week] INNER JOIN ([WeSm] INNER JOIN [Ussmen] ON WeSm.IdSmena=Ussmen.IdSmena AND Ussmen.IdUser='" + User.id + "')ON WeSm.IdWeek = Week.Id ORDER BY Week.DayOfWeek ASC";
             SqlCommand command2 = new SqlCommand(Qurty2, con);
             SqlDataReader reader = command2.ExecuteReader();
             while (reader.Read())
@@ -81,6 +88,7 @@ namespace Diplom
             comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             DrawGraph();
 
+
         }
         private void DrawGraph()
         {
@@ -88,10 +96,62 @@ namespace Diplom
             SqlCommand cmd = new SqlCommand("SELECT Name FROM [User] WHERE Id='" + User.id + "'",con);
             string x = cmd.ExecuteScalar().ToString();
             con.Close();
-            GraphPane pane = zgc.GraphPane;
-            pane.XAxis.Title.Text = "Дни";
-            pane.YAxis.Title.Text = "Часы";
-            pane.Title.Text = x;
+            zgc.MasterPane.PaneList.Clear();
+            GraphPane pane1 = new GraphPane();
+            pane1.XAxis.Title.Text = "Дни";
+            pane1.YAxis.Title.Text = "Часы";
+            pane1.Title.Text = x;
+
+            int itemscount = 7;
+            Random rnd = new Random();
+
+            double[] YValues1 = GenerateData(itemscount, rnd);
+            double[] YValues2 = GenerateData(itemscount, rnd);
+            double[] YValues3 = GenerateData(itemscount, rnd);
+
+            double[] XValues = new double[itemscount];
+
+            for (int i = 0; i < itemscount; i++)
+            {
+                XValues[i] = i + 1;
+            }
+
+            CreateBars(pane1, XValues, YValues1, YValues2, YValues3);
+
+            pane1.BarSettings.Type = BarType.Overlay;
+
+            zgc.MasterPane.Add(pane1);
+
+            using (Graphics g = CreateGraphics())
+            {
+
+                zgc.MasterPane.SetLayout(g, PaneLayout.SingleColumn);
+            }
+
+            zgc.AxisChange();
+
+            zgc.Invalidate();
+        }
+        private double[] GenerateData(int itemscount, Random rnd)
+        {
+            double[] values = new double[itemscount];
+
+            for (int i = 0; i < itemscount; i++)
+            {
+                values[i] = rnd.NextDouble();
+            }
+
+            return values;
+        }
+        private static void CreateBars(GraphPane pane,
+            double[] XValues,
+            double[] YValues1, double[] YValues2, double[] YValues3)
+        {
+            pane.CurveList.Clear();
+
+            pane.AddBar("", XValues, YValues1, Color.Green);
+            pane.AddBar("", XValues, YValues2, Color.Red);
+            pane.AddBar("", XValues, YValues3, Color.Gray);
         }
         void Time_TickM(object sender, EventArgs e)
         {
@@ -100,7 +160,7 @@ namespace Diplom
             {
                 con.Open();
                 LstV.Items.Clear();
-                string str1 = "SELECT Week.DayOfWeek, WeSm.IdSmena FROM [Week] INNER JOIN ([WeSm] INNER JOIN [Ussmen] ON WeSm.IdSmena=Ussmen.IdSmena AND Ussmen.IdUser='" + User.id + "')ON WeSm.IdWeek = Week.Id";
+                string str1 = "SELECT Week.DayOfWeek, WeSm.IdSmena FROM [Week] INNER JOIN ([WeSm] INNER JOIN [Ussmen] ON WeSm.IdSmena=Ussmen.IdSmena AND Ussmen.IdUser='" + User.id + "')ON WeSm.IdWeek = Week.Id ORDER BY Week.DayOfWeek ASC";
                 SqlCommand command2 = new SqlCommand(str1, con);
                 SqlDataReader reader = command2.ExecuteReader();
                 while (reader.Read())
@@ -127,14 +187,69 @@ namespace Diplom
                 v++;
             }
             con.Open();
-            SqlCommand cmd = new SqlCommand("SELECT WorkTime FROM [Work] WHERE IdUser='" + User.id + "'",con);
-            SqlCommand cmd2 = new SqlCommand("SELECT PauseTime FROM [Work] WHERE IdUser='" + User.id + "'",con)
-            
-            Vsego.Text = "Всего: " + "(" + "%)";
+            SqlCommand cmd = new SqlCommand("SELECT WorkTime, PauseTime FROM [Work] WHERE IdUser='" + User.id + "'", con);
+            SqlDataReader vse = cmd.ExecuteReader();
+            while (vse.Read())
+            {
+
+                b = vse[0].ToString();//rabota
+                b1 = vse[1].ToString();//pausa
+                wc += Convert.ToInt16(b[0] + "" + b[1]);
+                wm += Convert.ToInt16(b[3] + "" + b[4]);
+                if (wm >= 60) { wc += 1;wm -= 60; }
+                pc += Convert.ToInt16(b1[0] + "" + b1[1]);
+                pm += Convert.ToInt16(b1[3] + "" + b1[4]);
+                if (pm >= 60) { pc += 1;pm -= 60; }
+                c += Convert.ToInt16(b[0] + "" + b[1]);
+                c += Convert.ToInt16(b1[0]+""+b1[1]);
+                j += Convert.ToInt16(b[3] + "" + b[4]);
+                if (j >= 60)
+                {
+                    c += 1;
+                    j = j - 60;
+                }
+                j += Convert.ToInt16(b1[3]+ "" +b1[4]);
+                if (j >= 60)
+                {
+                    c += 1;
+                    j = j - 60;
+                }
+
+            }
+            vse.Close();
+            Vsego.Text = "Всего: " + c + ":" + j + "(100%)";
+            pv = c * 60 + j;
+            pr = (wc * 60 + wm)*100/pv;
+            Rabota.Text = "В работе: "+wc+":"+wm+"("+ pr +"%)";
+            Pauza.Text = "Пауза: " + pc + ":" + pm + "(" + (100-pr) +"%)";
+            con.Close();
+            pc = 0;
+            pm = 0;
+            wc = 0;
+            wm = 0;
+            c = 0;
+            j = 0;
         }
         void Timer_Tick(object sender, EventArgs e)
         {
-            WTime.Text = H + ":" + m;
+            if (WTime.Text[1] == ':'|| WTime.Text[1]=='0')
+            {
+                WTime.Text = "0" + H + ":" + m;
+                if (WTime.Text[WTime.Text.Count() - 2] == ':' || WTime.Text[WTime.Text.Count() - 2]=='0')
+                {
+                    WTime.Text = "0" + H + ":0" + m;
+                }
+            }
+            else if (WTime.Text[1] != ':' || WTime.Text[1]!='0' && WTime.Text[WTime.Text.Count() - 2] == ':' || WTime.Text[WTime.Text.Count() - 2]=='0')
+            {
+
+                WTime.Text = H + ":0" + m;
+
+            }
+            else
+            {
+                WTime.Text = H + ":" + m;
+            }
 
             if (m < 60)
             {
@@ -159,7 +274,24 @@ namespace Diplom
         }
         void Timer_Tick2(object sender, EventArgs e)
         {
-            PTime.Text = H2 + ":" + m2;
+            if (PTime.Text[1] == ':' || PTime.Text[1] == '0')
+            {
+                PTime.Text = "0" + H + ":" + m;
+                if (PTime.Text[PTime.Text.Count() - 2] == ':' || PTime.Text[PTime.Text.Count() - 2] == '0')
+                {
+                    PTime.Text = "0" + H2 + ":0" + m2;
+                }
+            }
+            else if (PTime.Text[1] != ':' || PTime.Text[1] != '0' && PTime.Text[PTime.Text.Count() - 2] == ':' || PTime.Text[PTime.Text.Count() - 2] == '0')
+            {
+
+                PTime.Text = H2 + ":0" + m2;
+
+            }
+            else
+            {
+                PTime.Text = H2 + ":" + m2;
+            }
 
             if (m2 < 59)
             {
@@ -207,11 +339,14 @@ namespace Diplom
             timer3.Stop();
             s = 0;
             s2 = 0;
-            WTime.Text = "0:0";
-            PTime.Text = "0:0";
+            WTime.Text = "00:00";
+            PTime.Text = "00:00";
             if (En == null) { En = DateTime.Now.ToString("HH:mm"); }
+            string dt = DateTime.Now.ToString("dddd");
             con.Open();
-            SqlCommand cmd = new SqlCommand("INSERT INTO [Work] (WorkTime, PauseTime, StartWork, EndWork, IdUser)VALUES('" + rabT + "', '" + pasT + "', '" + St + "', '" + En + "', '" + User.id + "')",con);
+            SqlCommand cm = new SqlCommand("SELECT Id FROM [Week] WHERE DayOfWeek='" + dt + "'",con);
+            string sd = cm.ExecuteScalar().ToString();
+            SqlCommand cmd = new SqlCommand("INSERT INTO [Work] (WorkTime, PauseTime, StartWork, EndWork, IdUser, IdWeek)VALUES('" + rabT + "', '" + pasT + "', '" + St + "', '" + En + "', '" + User.id + "','" + sd + "')",con);
             cmd.ExecuteNonQuery();
             con.Close();
         }
@@ -300,8 +435,9 @@ namespace Diplom
             { mas[5] = 6; }
             if (c7.Checked == true)
             { mas[6] = 7; }
-            
+           
             con.Open();
+            
             for (int i = 0; i <= 6; i++)
             {
                 if (mas[i] != 0)

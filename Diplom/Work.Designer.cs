@@ -39,8 +39,11 @@
             this.Pause = new System.Windows.Forms.Button();
             this.Stop = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.Pauza = new System.Windows.Forms.Label();
             this.Edit = new System.Windows.Forms.Button();
+            this.Rabota = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.Vsego = new System.Windows.Forms.Label();
             this.c7 = new System.Windows.Forms.CheckBox();
             this.LstV = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -61,9 +64,6 @@
             this.timer4 = new System.Windows.Forms.Timer(this.components);
             this.Stat = new System.Windows.Forms.Button();
             this.zgc = new ZedGraph.ZedGraphControl();
-            this.Vsego = new System.Windows.Forms.Label();
-            this.Rabota = new System.Windows.Forms.Label();
-            this.Pauza = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.smenaBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.diplomDataSet)).BeginInit();
@@ -94,25 +94,23 @@
             // 
             // WTime
             // 
-            this.WTime.AutoSize = true;
             this.WTime.BackColor = System.Drawing.Color.White;
-            this.WTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.WTime.Location = new System.Drawing.Point(146, 44);
+            this.WTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 60F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.WTime.Location = new System.Drawing.Point(113, 44);
             this.WTime.Name = "WTime";
-            this.WTime.Size = new System.Drawing.Size(178, 108);
+            this.WTime.Size = new System.Drawing.Size(238, 108);
             this.WTime.TabIndex = 1;
-            this.WTime.Text = "0:0";
+            this.WTime.Text = "00:00";
             // 
             // PTime
             // 
-            this.PTime.AutoSize = true;
             this.PTime.BackColor = System.Drawing.Color.White;
-            this.PTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 72F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.PTime.Location = new System.Drawing.Point(363, 44);
+            this.PTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 60F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.PTime.Location = new System.Drawing.Point(357, 48);
             this.PTime.Name = "PTime";
-            this.PTime.Size = new System.Drawing.Size(178, 108);
+            this.PTime.Size = new System.Drawing.Size(251, 104);
             this.PTime.TabIndex = 2;
-            this.PTime.Text = "0:0";
+            this.PTime.Text = "00:00";
             // 
             // Start
             // 
@@ -180,6 +178,19 @@
             this.panel1.Size = new System.Drawing.Size(521, 358);
             this.panel1.TabIndex = 6;
             // 
+            // Pauza
+            // 
+            this.Pauza.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.Pauza.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.Pauza.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.Pauza.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Pauza.Location = new System.Drawing.Point(351, 276);
+            this.Pauza.Name = "Pauza";
+            this.Pauza.Size = new System.Drawing.Size(145, 53);
+            this.Pauza.TabIndex = 19;
+            this.Pauza.Text = "Пауза: 0:0 (%)";
+            this.Pauza.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Edit
             // 
             this.Edit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
@@ -190,6 +201,19 @@
             this.Edit.Text = "Запись";
             this.Edit.UseVisualStyleBackColor = true;
             this.Edit.Click += new System.EventHandler(this.Edit_Click);
+            // 
+            // Rabota
+            // 
+            this.Rabota.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.Rabota.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.Rabota.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.Rabota.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Rabota.Location = new System.Drawing.Point(170, 276);
+            this.Rabota.Name = "Rabota";
+            this.Rabota.Size = new System.Drawing.Size(175, 53);
+            this.Rabota.TabIndex = 18;
+            this.Rabota.Text = "В работе: 0:0 (%)";
+            this.Rabota.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // comboBox1
             // 
@@ -204,6 +228,19 @@
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 9;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // Vsego
+            // 
+            this.Vsego.BackColor = System.Drawing.Color.Silver;
+            this.Vsego.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.Vsego.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.Vsego.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Vsego.Location = new System.Drawing.Point(4, 276);
+            this.Vsego.Name = "Vsego";
+            this.Vsego.Size = new System.Drawing.Size(160, 53);
+            this.Vsego.TabIndex = 17;
+            this.Vsego.Text = "Всего: 0:0 (%)";
+            this.Vsego.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // c7
             // 
@@ -369,64 +406,25 @@
             // 
             // zgc
             // 
-            this.zgc.Location = new System.Drawing.Point(3, 3);
+            this.zgc.Location = new System.Drawing.Point(4, 2);
             this.zgc.Name = "zgc";
             this.zgc.ScrollGrace = 0D;
             this.zgc.ScrollMaxX = 0D;
             this.zgc.ScrollMaxY = 0D;
-            this.zgc.ScrollMaxY2 = 3D;
+            this.zgc.ScrollMaxY2 = 0D;
             this.zgc.ScrollMinX = 0D;
             this.zgc.ScrollMinY = 0D;
             this.zgc.ScrollMinY2 = 0D;
-            this.zgc.Size = new System.Drawing.Size(515, 270);
+            this.zgc.Size = new System.Drawing.Size(509, 267);
             this.zgc.TabIndex = 11;
             this.zgc.UseExtendedPrintDialog = true;
-            // 
-            // Vsego
-            // 
-            this.Vsego.BackColor = System.Drawing.Color.Silver;
-            this.Vsego.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.Vsego.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.Vsego.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.Vsego.Location = new System.Drawing.Point(8, 276);
-            this.Vsego.Name = "Vsego";
-            this.Vsego.Size = new System.Drawing.Size(161, 53);
-            this.Vsego.TabIndex = 17;
-            this.Vsego.Text = "Всего: 0:0 (100%)";
-            this.Vsego.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // Rabota
-            // 
-            this.Rabota.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.Rabota.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.Rabota.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.Rabota.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.Rabota.Location = new System.Drawing.Point(170, 276);
-            this.Rabota.Name = "Rabota";
-            this.Rabota.Size = new System.Drawing.Size(175, 53);
-            this.Rabota.TabIndex = 18;
-            this.Rabota.Text = "В работе: 0:0 (70%)";
-            this.Rabota.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // Pauza
-            // 
-            this.Pauza.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.Pauza.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.Pauza.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.Pauza.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.Pauza.Location = new System.Drawing.Point(346, 276);
-            this.Pauza.Name = "Pauza";
-            this.Pauza.Size = new System.Drawing.Size(145, 53);
-            this.Pauza.TabIndex = 19;
-            this.Pauza.Text = "Пауза: 0:0 (30%)";
-            this.Pauza.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Work
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(617, 462);
+            this.ClientSize = new System.Drawing.Size(617, 364);
             this.Controls.Add(this.Stat);
             this.Controls.Add(this.BackToAuto);
             this.Controls.Add(this.ExitApp);
@@ -446,7 +444,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.smenaBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.diplomDataSet)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -483,9 +480,9 @@
         private System.Windows.Forms.Button BackToAuto;
         private System.Windows.Forms.Timer timer4;
         private System.Windows.Forms.Button Stat;
-        private ZedGraph.ZedGraphControl zgc;
         private System.Windows.Forms.Label Pauza;
         private System.Windows.Forms.Label Rabota;
         private System.Windows.Forms.Label Vsego;
+        private ZedGraph.ZedGraphControl zgc;
     }
 }
