@@ -69,7 +69,7 @@ namespace Diplom
             timer3.Start();
             con.Open();           
             LstV.Items.Clear();
-            string Qurty2 = "SELECT Week.DayOfWeek, WeSm.IdSmena FROM [Week] INNER JOIN ([WeSm] INNER JOIN [Ussmen] ON WeSm.IdSmena=Ussmen.IdSmena AND Ussmen.IdUser='" + User.id + "')ON WeSm.IdWeek = Week.Id ORDER BY Week.DayOfWeek ASC";
+            string Qurty2 = "SELECT Week.DayOfWeek, Smena.SmSta, Smena.SmEnd FROM [Week] INNER JOIN ([WeSm] INNER JOIN ([Ussmen] INNER JOIN [Smena] ON Ussmen.IdSmena=Smena.Id) ON WeSm.IdSmena=Ussmen.IdSmena AND Ussmen.IdUser='" + User.id + "')ON WeSm.IdWeek = Week.Id ORDER BY Week.DayOfWeek ASC";
             SqlCommand command2 = new SqlCommand(Qurty2, con);
             SqlDataReader reader = command2.ExecuteReader();
             while (reader.Read())
@@ -156,11 +156,12 @@ namespace Diplom
         void Time_TickM(object sender, EventArgs e)
         {
             s3++;
+            con.Open();
             if (s3 % 10 == 0)
             {
-                con.Open();
+                
                 LstV.Items.Clear();
-                string str1 = "SELECT Week.DayOfWeek, WeSm.IdSmena FROM [Week] INNER JOIN ([WeSm] INNER JOIN [Ussmen] ON WeSm.IdSmena=Ussmen.IdSmena AND Ussmen.IdUser='" + User.id + "')ON WeSm.IdWeek = Week.Id ORDER BY Week.DayOfWeek ASC";
+                string str1 = "SELECT Week.DayOfWeek, Smena.SmSta, Smena.SmEnd FROM [Week] INNER JOIN ([WeSm] INNER JOIN ([Ussmen] INNER JOIN [Smena] ON Ussmen.IdSmena=Smena.Id) ON WeSm.IdSmena=Ussmen.IdSmena AND Ussmen.IdUser='" + User.id + "')ON WeSm.IdWeek = Week.Id ORDER BY Week.DayOfWeek ASC";
                 SqlCommand command2 = new SqlCommand(str1, con);
                 SqlDataReader reader = command2.ExecuteReader();
                 while (reader.Read())
@@ -173,8 +174,24 @@ namespace Diplom
                     LstV.Items.Add(item);
                 }
                 reader.Close();
-                con.Close();
+                
             }
+            SqlCommand cm2 = new SqlCommand("SELECT IdStatus FROM [User] WHERE Id='" + User.id + "'",con);
+            Status.Text =cm2.ExecuteScalar().ToString();
+            string st = Status.Text;
+            if (st.Trim() == "Активен")
+            {
+                Status.BackColor = Color.FromArgb(128, 255, 128);
+            }
+            else if (st.Trim() == "Неактивен")
+            {
+                Status.BackColor = Color.Silver;
+            }
+            else if (st.Trim() == "Пауза")
+            {
+                Status.BackColor = Color.FromArgb(255, 128, 128);
+            }
+            con.Close();
         }
         void Timer_Tick4(object sender, EventArgs e)
         {
@@ -324,12 +341,20 @@ namespace Diplom
             if (St == null) { St = DateTime.Now.ToString("HH:mm"); }
             Pause.Enabled = true;
             Stop.Enabled = true;
+            con.Open();
+            SqlCommand cmd = new SqlCommand("UPDATE [User] SET IdStatus='Активен' WHERE Id='" + User.id + "'",con);
+            cmd.ExecuteNonQuery();
+            con.Close();
         }
 
         private void Pause_Click(object sender, EventArgs e)
         {
             timer1.Stop();
             timer2.Start();
+            con.Open();
+            SqlCommand cmd = new SqlCommand("UPDATE [User] SET IdStatus='Пауза' WHERE Id='" + User.id + "'", con);
+            cmd.ExecuteNonQuery();
+            con.Close();
         }
 
         private void Stop_Click(object sender, EventArgs e)
@@ -348,6 +373,9 @@ namespace Diplom
             string sd = cm.ExecuteScalar().ToString();
             SqlCommand cmd = new SqlCommand("INSERT INTO [Work] (WorkTime, PauseTime, StartWork, EndWork, IdUser, IdWeek)VALUES('" + rabT + "', '" + pasT + "', '" + St + "', '" + En + "', '" + User.id + "','" + sd + "')",con);
             cmd.ExecuteNonQuery();
+            SqlCommand cmd2 = new SqlCommand("UPDATE [User] SET IdStatus='Активен' WHERE Id='" + User.id + "'", con);
+            cmd2.ExecuteNonQuery();    
+            
             con.Close();
         }
 
@@ -412,11 +440,19 @@ namespace Diplom
             Form1 f = new Form1();
             f.ShowDialog();
             this.Close();
+            con.Open();
+            SqlCommand cmd = new SqlCommand("UPDATE [User] SET IdStatus='Неактивен' WHERE Id='" + User.id + "'", con);
+            cmd.ExecuteNonQuery();
+            con.Close();
         }
 
         private void ExitApp_Click(object sender, EventArgs e)
         {
             Application.Exit(); ;
+            con.Open();
+            SqlCommand cmd = new SqlCommand("UPDATE [User] SET IdStatus='Неактивен' WHERE Id='" + User.id + "'", con);
+            cmd.ExecuteNonQuery();
+            con.Close();
         }
 
         private void Edit_Click(object sender, EventArgs e)
@@ -446,6 +482,14 @@ namespace Diplom
                     cmd.ExecuteNonQuery();
                 }
             }
+            con.Close();
+        }
+
+        private void Work_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            con.Open();
+            SqlCommand cmd = new SqlCommand("UPDATE [User] SET IdStatus='Неактивен' WHERE Id='" + User.id + "'", con);
+            cmd.ExecuteNonQuery();
             con.Close();
         }
 

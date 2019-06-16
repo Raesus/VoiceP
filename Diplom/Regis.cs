@@ -22,7 +22,7 @@ namespace Diplom
         {
             SqlConnection con = new SqlConnection(@"Data Source=KRAI-ПК\SQLEXPRESS;Initial Catalog=Diplom;User ID=sa;Password=1234");
             con.Open();
-            SqlCommand cmd = new SqlCommand("INSERT INTO [User] (Name, Role, Nmbr, Login, Psswrd) VALUES ('" + FIO.Text + "','Ученик','" + Numb.Text + "','" + Login.Text + "', '" + Pass.Text + "')", con);
+            SqlCommand cmd = new SqlCommand("INSERT INTO [User] (Name, Role, Nmbr, Login, Psswrd, IdStatus) VALUES ('" + FIO.Text + "','Ученик','" + Numb.Text + "','" + Login.Text + "', '" + Pass.Text + "', 'Неактивен')", con);
 
             cmd.ExecuteNonQuery();
             con.Close();

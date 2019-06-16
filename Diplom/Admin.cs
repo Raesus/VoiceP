@@ -16,5 +16,18 @@ namespace Diplom
         {
             InitializeComponent();
         }
+
+        private void ExitApp_Click(object sender, EventArgs e)
+        {
+            Application.Exit(); ;
+        }
+
+        private void BackToAuto_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Form1 f = new Form1();
+            f.ShowDialog();
+            this.Close();
+        }
     }
 }

@@ -39,6 +39,7 @@
             this.Pause = new System.Windows.Forms.Button();
             this.Stop = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.zgc = new ZedGraph.ZedGraphControl();
             this.Pauza = new System.Windows.Forms.Label();
             this.Edit = new System.Windows.Forms.Button();
             this.Rabota = new System.Windows.Forms.Label();
@@ -63,7 +64,8 @@
             this.BackToAuto = new System.Windows.Forms.Button();
             this.timer4 = new System.Windows.Forms.Timer(this.components);
             this.Stat = new System.Windows.Forms.Button();
-            this.zgc = new ZedGraph.ZedGraphControl();
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Status = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.smenaBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.diplomDataSet)).BeginInit();
@@ -74,7 +76,7 @@
             this.Profile.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.Profile.Location = new System.Drawing.Point(1, 1);
             this.Profile.Name = "Profile";
-            this.Profile.Size = new System.Drawing.Size(91, 26);
+            this.Profile.Size = new System.Drawing.Size(101, 26);
             this.Profile.TabIndex = 0;
             this.Profile.Text = "Профиль";
             this.Profile.UseVisualStyleBackColor = true;
@@ -173,10 +175,25 @@
             this.panel1.Controls.Add(this.c4);
             this.panel1.Controls.Add(this.c1);
             this.panel1.Controls.Add(this.c3);
-            this.panel1.Location = new System.Drawing.Point(94, 3);
+            this.panel1.Location = new System.Drawing.Point(103, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(521, 358);
+            this.panel1.Size = new System.Drawing.Size(512, 358);
             this.panel1.TabIndex = 6;
+            // 
+            // zgc
+            // 
+            this.zgc.Location = new System.Drawing.Point(4, 4);
+            this.zgc.Name = "zgc";
+            this.zgc.ScrollGrace = 0D;
+            this.zgc.ScrollMaxX = 0D;
+            this.zgc.ScrollMaxY = 0D;
+            this.zgc.ScrollMaxY2 = 0D;
+            this.zgc.ScrollMinX = 0D;
+            this.zgc.ScrollMinY = 0D;
+            this.zgc.ScrollMinY2 = 0D;
+            this.zgc.Size = new System.Drawing.Size(509, 267);
+            this.zgc.TabIndex = 11;
+            this.zgc.UseExtendedPrintDialog = true;
             // 
             // Pauza
             // 
@@ -256,10 +273,11 @@
             // 
             this.LstV.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
-            this.columnHeader2});
+            this.columnHeader2,
+            this.columnHeader3});
             this.LstV.FullRowSelect = true;
             this.LstV.GridLines = true;
-            this.LstV.Location = new System.Drawing.Point(3, 3);
+            this.LstV.Location = new System.Drawing.Point(4, 5);
             this.LstV.Name = "LstV";
             this.LstV.Size = new System.Drawing.Size(511, 266);
             this.LstV.TabIndex = 0;
@@ -269,12 +287,12 @@
             // columnHeader1
             // 
             this.columnHeader1.Text = "День";
-            this.columnHeader1.Width = 230;
+            this.columnHeader1.Width = 144;
             // 
             // columnHeader2
             // 
-            this.columnHeader2.Text = "Смена";
-            this.columnHeader2.Width = 248;
+            this.columnHeader2.Text = "Начало смены";
+            this.columnHeader2.Width = 188;
             // 
             // c6
             // 
@@ -361,7 +379,7 @@
             this.Smena.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.Smena.Location = new System.Drawing.Point(1, 26);
             this.Smena.Name = "Smena";
-            this.Smena.Size = new System.Drawing.Size(91, 26);
+            this.Smena.Size = new System.Drawing.Size(101, 26);
             this.Smena.TabIndex = 7;
             this.Smena.Text = "Смена";
             this.Smena.UseVisualStyleBackColor = true;
@@ -376,7 +394,7 @@
             this.ExitApp.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.ExitApp.Location = new System.Drawing.Point(2, 332);
             this.ExitApp.Name = "ExitApp";
-            this.ExitApp.Size = new System.Drawing.Size(91, 26);
+            this.ExitApp.Size = new System.Drawing.Size(100, 26);
             this.ExitApp.TabIndex = 8;
             this.ExitApp.Text = "Выход";
             this.ExitApp.UseVisualStyleBackColor = true;
@@ -387,7 +405,7 @@
             this.BackToAuto.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.BackToAuto.Location = new System.Drawing.Point(2, 287);
             this.BackToAuto.Name = "BackToAuto";
-            this.BackToAuto.Size = new System.Drawing.Size(91, 46);
+            this.BackToAuto.Size = new System.Drawing.Size(100, 46);
             this.BackToAuto.TabIndex = 9;
             this.BackToAuto.Text = "Сменить пользователя";
             this.BackToAuto.UseVisualStyleBackColor = true;
@@ -398,26 +416,29 @@
             this.Stat.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.Stat.Location = new System.Drawing.Point(1, 51);
             this.Stat.Name = "Stat";
-            this.Stat.Size = new System.Drawing.Size(91, 26);
+            this.Stat.Size = new System.Drawing.Size(101, 26);
             this.Stat.TabIndex = 10;
             this.Stat.Text = "Статистика";
             this.Stat.UseVisualStyleBackColor = true;
             this.Stat.Click += new System.EventHandler(this.Stat_Click);
             // 
-            // zgc
+            // columnHeader3
             // 
-            this.zgc.Location = new System.Drawing.Point(4, 2);
-            this.zgc.Name = "zgc";
-            this.zgc.ScrollGrace = 0D;
-            this.zgc.ScrollMaxX = 0D;
-            this.zgc.ScrollMaxY = 0D;
-            this.zgc.ScrollMaxY2 = 0D;
-            this.zgc.ScrollMinX = 0D;
-            this.zgc.ScrollMinY = 0D;
-            this.zgc.ScrollMinY2 = 0D;
-            this.zgc.Size = new System.Drawing.Size(509, 267);
-            this.zgc.TabIndex = 11;
-            this.zgc.UseExtendedPrintDialog = true;
+            this.columnHeader3.Text = "Конец смены";
+            this.columnHeader3.Width = 172;
+            // 
+            // Status
+            // 
+            this.Status.BackColor = System.Drawing.Color.Silver;
+            this.Status.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.Status.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.Status.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Status.Location = new System.Drawing.Point(1, 252);
+            this.Status.Name = "Status";
+            this.Status.Size = new System.Drawing.Size(102, 32);
+            this.Status.TabIndex = 20;
+            this.Status.Text = "Неактивен";
+            this.Status.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Work
             // 
@@ -425,6 +446,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(617, 364);
+            this.Controls.Add(this.Status);
             this.Controls.Add(this.Stat);
             this.Controls.Add(this.BackToAuto);
             this.Controls.Add(this.ExitApp);
@@ -438,6 +460,7 @@
             this.Controls.Add(this.Profile);
             this.Name = "Work";
             this.Text = "Work";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Work_FormClosing);
             this.Load += new System.EventHandler(this.Work_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -484,5 +507,7 @@
         private System.Windows.Forms.Label Rabota;
         private System.Windows.Forms.Label Vsego;
         private ZedGraph.ZedGraphControl zgc;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.Label Status;
     }
 }
