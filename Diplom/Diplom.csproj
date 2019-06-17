@@ -60,6 +60,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DiplomDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="DiplomDataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DiplomDataSet1.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -112,6 +117,17 @@
     </None>
     <None Include="DiplomDataSet.xss">
       <DependentUpon>DiplomDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="DiplomDataSet1.xsc">
+      <DependentUpon>DiplomDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="DiplomDataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DiplomDataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DiplomDataSet1.xss">
+      <DependentUpon>DiplomDataSet1.xsd</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

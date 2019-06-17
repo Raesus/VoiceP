@@ -68,7 +68,6 @@ namespace Diplom
             Vsego.Visible = false;
             timer3.Start();
             con.Open();           
-            LstV.Items.Clear();
             string Qurty2 = "SELECT Week.DayOfWeek, Smena.SmSta, Smena.SmEnd FROM [Week] INNER JOIN ([WeSm] INNER JOIN ([Ussmen] INNER JOIN [Smena] ON Ussmen.IdSmena=Smena.Id) ON WeSm.IdSmena=Ussmen.IdSmena AND Ussmen.IdUser='" + User.id + "')ON WeSm.IdWeek = Week.Id ORDER BY Week.DayOfWeek ASC";
             SqlCommand command2 = new SqlCommand(Qurty2, con);
             SqlDataReader reader = command2.ExecuteReader();
@@ -239,6 +238,23 @@ namespace Diplom
             pr = (wc * 60 + wm)*100/pv;
             Rabota.Text = "В работе: "+wc+":"+wm+"("+ pr +"%)";
             Pauza.Text = "Пауза: " + pc + ":" + pm + "(" + (100-pr) +"%)";
+            cmd.CommandText = "SELECT FioUs FROM [WrTime] WHERE FioUs='" + User.id + "'";
+
+
+            if (cmd.ExecuteScalar() == null)
+            {
+                SqlCommand cm2 = new SqlCommand("INSERT INTO [WrTime] (FioUs, AllTime, PsTime, WrkTime)VALUES('" + User.id + "', '" + c + ":" + j + "', '" + pc + ":" + pm + "', '" + wc + ":" + wm + "')", con);
+                cm2.ExecuteNonQuery();
+            }
+            else if (cmd.ExecuteScalar()!= null)
+            {
+                SqlCommand cmd2 = new SqlCommand("UPDATE [WrTime] SET AllTime='" + c + ":" + j + "' WHERE FioUs='" + User.id + "'",con);
+                cmd2.ExecuteNonQuery();
+                SqlCommand cmd3 = new SqlCommand("UPDATE [WrTime] SET PsTime='" + pc + ":" + pm + "' WHERE FioUs='" + User.id + "'", con);
+                cmd.ExecuteNonQuery();
+                SqlCommand cmd4 = new SqlCommand("UPDATE [WrTime] SET WrkTime='" + wc + ":" + wm + "' WHERE FioUs='" + User.id + "'", con);
+                cmd4.ExecuteNonQuery();
+            }
             con.Close();
             pc = 0;
             pm = 0;

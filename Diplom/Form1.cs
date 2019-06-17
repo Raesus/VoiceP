@@ -20,7 +20,8 @@ namespace Diplom
 
         private void Log_Click(object sender, EventArgs e)
         {
-
+            try
+            {
 
                 SqlConnection con = new SqlConnection(@"Data Source=KRAI-ПК\SQLEXPRESS;Initial Catalog=Diplom;User ID=sa;Password=1234");
                 SqlCommand cmd = new SqlCommand("SELECT Role FROM [User] WHERE Login='" + LogIn.Text + "' AND Psswrd='" + Pass.Text + "'", con);
@@ -47,6 +48,11 @@ namespace Diplom
                     this.Close();
                 }
                 con.Close();
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка!");
+            }
    
         }
 

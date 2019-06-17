@@ -11,5 +11,6 @@ namespace Diplom
         public static string Login { get; set; }
         public static string pass { get; set; }
         public static string id { get; set; }
+        public static string Fio { get; set; }
     }
 }

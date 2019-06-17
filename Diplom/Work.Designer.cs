@@ -49,6 +49,7 @@
             this.LstV = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.c6 = new System.Windows.Forms.CheckBox();
             this.c2 = new System.Windows.Forms.CheckBox();
             this.c5 = new System.Windows.Forms.CheckBox();
@@ -64,7 +65,6 @@
             this.BackToAuto = new System.Windows.Forms.Button();
             this.timer4 = new System.Windows.Forms.Timer(this.components);
             this.Stat = new System.Windows.Forms.Button();
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Status = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.smenaBindingSource)).BeginInit();
@@ -182,7 +182,7 @@
             // 
             // zgc
             // 
-            this.zgc.Location = new System.Drawing.Point(4, 4);
+            this.zgc.Location = new System.Drawing.Point(4, 5);
             this.zgc.Name = "zgc";
             this.zgc.ScrollGrace = 0D;
             this.zgc.ScrollMaxX = 0D;
@@ -293,6 +293,11 @@
             // 
             this.columnHeader2.Text = "Начало смены";
             this.columnHeader2.Width = 188;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Конец смены";
+            this.columnHeader3.Width = 172;
             // 
             // c6
             // 
@@ -421,11 +426,6 @@
             this.Stat.Text = "Статистика";
             this.Stat.UseVisualStyleBackColor = true;
             this.Stat.Click += new System.EventHandler(this.Stat_Click);
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Text = "Конец смены";
-            this.columnHeader3.Width = 172;
             // 
             // Status
             // 
