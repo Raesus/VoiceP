@@ -39,7 +39,6 @@
             this.Pause = new System.Windows.Forms.Button();
             this.Stop = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.zgc = new ZedGraph.ZedGraphControl();
             this.Pauza = new System.Windows.Forms.Label();
             this.Edit = new System.Windows.Forms.Button();
             this.Rabota = new System.Windows.Forms.Label();
@@ -160,7 +159,6 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.zgc);
             this.panel1.Controls.Add(this.Pauza);
             this.panel1.Controls.Add(this.Edit);
             this.panel1.Controls.Add(this.Rabota);
@@ -179,21 +177,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(512, 358);
             this.panel1.TabIndex = 6;
-            // 
-            // zgc
-            // 
-            this.zgc.Location = new System.Drawing.Point(4, 5);
-            this.zgc.Name = "zgc";
-            this.zgc.ScrollGrace = 0D;
-            this.zgc.ScrollMaxX = 0D;
-            this.zgc.ScrollMaxY = 0D;
-            this.zgc.ScrollMaxY2 = 0D;
-            this.zgc.ScrollMinX = 0D;
-            this.zgc.ScrollMinY = 0D;
-            this.zgc.ScrollMinY2 = 0D;
-            this.zgc.Size = new System.Drawing.Size(509, 267);
-            this.zgc.TabIndex = 11;
-            this.zgc.UseExtendedPrintDialog = true;
             // 
             // Pauza
             // 
@@ -506,7 +489,6 @@
         private System.Windows.Forms.Label Pauza;
         private System.Windows.Forms.Label Rabota;
         private System.Windows.Forms.Label Vsego;
-        private ZedGraph.ZedGraphControl zgc;
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.Label Status;
     }
